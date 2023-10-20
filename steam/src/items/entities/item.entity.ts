@@ -6,8 +6,8 @@ export class Items {
   id: number;
 
   @Column()
-  name: string;
+  buff_id: string;
 
   @Column()
-  price: string;
+  item_name: string;
 }

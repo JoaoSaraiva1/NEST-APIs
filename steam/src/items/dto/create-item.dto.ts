@@ -1,5 +1,5 @@
 export class CreateItemDto {
   id: number;
-  name: string;
-  price: string;
+  buff_id: string;
+  item_name: string;
 }
