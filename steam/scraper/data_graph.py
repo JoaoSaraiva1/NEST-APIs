@@ -14,7 +14,6 @@ db_params = {
 # Specify the item IDs (buff_ids) you want to include in the plots
 selected_buff_ids = ["928047", "928111", "928387", "927990", "928045", "928026", "928209", "928049", "928188", "928078", "928078", "928375", "928083", "923019", "928297", "927981", "928030", "928030", "928029"]
 
-
 try:
     conn = psycopg2.connect(**db_params)
     cur = conn.cursor()
