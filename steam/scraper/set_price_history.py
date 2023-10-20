@@ -40,7 +40,7 @@ def fetch_and_update_price(buff_id, conn, max_retries=5):
                     print(f"Price for goods ID {buff_id}: {price} added to batch.")
                     return  # Success, exit the function
                 else:
-                    print(f"No items found for goods ID {buff_id}.")
+                    print(f"No price found for goods ID {buff_id}.")
             else:
                 print(f"No 'items' key found in the response for goods ID {buff_id}.")
         except (requests.exceptions.RequestException, json.JSONDecodeError) as e:
@@ -66,6 +66,8 @@ def batch_insert_to_db(conn, data):
 
 if __name__ == "__main__":
     try:
+        start_time = time.time()
+
         conn = psycopg2.connect(**db_params)
         cur = conn.cursor()
         cur.execute("SELECT buff_id FROM items")
@@ -82,5 +84,9 @@ if __name__ == "__main__":
         batch_insert_to_db(conn, batch_data)
 
         cur.close()
+
+        end_time = time.time()  # Capture the end time
+        elapsed_time = end_time - start_time
+        print(f"Script completed in {elapsed_time:.2f} seconds")  # Print the elapsed time
     except psycopg2.Error as e:
         print("Error connecting to the database:", e)
