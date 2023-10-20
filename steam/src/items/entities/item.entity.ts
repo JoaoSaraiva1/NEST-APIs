@@ -1,7 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+// src/items/entities/item.entity.ts
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { PriceHistory } from '../../price_history/entities/price_history.entity'; // Update the import path
 
-@Entity()
-export class Items {
+@Entity({ name: 'items' })
+export class Item {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -10,4 +12,7 @@ export class Items {
 
   @Column()
   item_name: string;
+
+  @OneToMany(() => PriceHistory, (priceHistory) => priceHistory.buff_id)
+  priceHistory: PriceHistory[];
 }

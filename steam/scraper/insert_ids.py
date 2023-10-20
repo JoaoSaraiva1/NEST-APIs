@@ -4,7 +4,7 @@ import psycopg2
 db_params = {
     "dbname": "postgres",
     "user": "postgres",
-    "password": "postgres",
+    "password": "joaoename",
     "host": "127.0.0.1",  # Replace with your DB host if necessary
     "port": "5432"   # Replace with your DB port if necessary
 }

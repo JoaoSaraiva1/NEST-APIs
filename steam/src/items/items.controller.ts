@@ -1,46 +1,46 @@
+// src/items/items.controller.ts
 import {
   Controller,
   Get,
   Post,
-  Body,
-  Param,
-  Delete,
   Put,
+  Delete,
+  Param,
+  Body,
 } from '@nestjs/common';
 import { ItemsService } from './items.service';
-import { CreateItemDto } from './dto/create-item.dto';
-import { Items } from './entities/item.entity';
-import { UpdateItemDto } from './dto/update-item.dto';
+import { CreateItemDto } from '../items/dto/create-item.dto';
 
 @Controller('items')
 export class ItemsController {
   constructor(private readonly itemsService: ItemsService) {}
 
   @Post()
-  create(@Body() createItemDto: CreateItemDto): Promise<Items> {
-    return this.itemsService.create(createItemDto);
+  async createItem(@Body() createItemDto: CreateItemDto) {
+    return this.itemsService.createItem(createItemDto);
   }
 
   @Get()
-  findAll() {
-    return this.itemsService.findAll();
+  async getItems() {
+    return this.itemsService.getItems();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.itemsService.findOne(+id);
+  async getItemById(@Param('id') id: number) {
+    return this.itemsService.getItemById(id);
   }
 
   @Put(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateItemDto: UpdateItemDto,
-  ): Promise<Items> {
-    return this.itemsService.update(+id, updateItemDto);
+  async updateItem(
+    @Param('id') id: number,
+    @Body() createItemDto: CreateItemDto,
+  ) {
+    return this.itemsService.updateItem(id, createItemDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.itemsService.remove(+id);
+  async deleteItem(@Param('id') id: number) {
+    this.itemsService.deleteItem(id);
+    return { message: `Item with ID ${id} has been deleted` };
   }
 }

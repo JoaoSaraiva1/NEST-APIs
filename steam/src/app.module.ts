@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ItemsModule } from './items/items.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ItemsModule } from './items/items.module';
+import { PriceHistoryModule } from './price_history/price_history.module';
+import { PurchasedItemsModule } from './purchased_items/purchased_items.module';
 
 @Module({
   imports: [
@@ -17,6 +19,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       autoLoadEntities: true,
     }),
     ItemsModule,
+    PriceHistoryModule,
+    PurchasedItemsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
