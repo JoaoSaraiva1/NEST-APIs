@@ -6,7 +6,7 @@ from datetime import datetime
 db_params = {
     "dbname": "postgres",
     "user": "postgres",
-    "password": "postgres",
+    "password": "joaoename",
     "host": "127.0.0.1",  # Replace with your DB host if necessary
     "port": "5432"  # Replace with your DB port if necessary
 }
@@ -47,9 +47,10 @@ try:
             for i in range(len(item_names)):
                 if item_names[i] == item_name:
                     plt.plot(dates[i], prices[i], label=item_name, marker='o')
+                    #plt.plot(prices[i], linestyle = 'dotted')
 
             plt.legend()
-            plt.grid(True)
+            plt.grid(color = 'green', linestyle = '--', linewidth = 0.5)
 
             plt.show()
 

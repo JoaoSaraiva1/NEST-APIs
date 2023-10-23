@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { PriceHistory } from './entities/price_history.entity';
 import { CreatePriceHistoryDto } from './dto/create-price_history.dto';
+import { UpdatePriceHistoryDto } from './dto/update-price_history.dto';
 
 @Injectable()
 export class PriceHistoryService {
@@ -40,10 +41,10 @@ export class PriceHistoryService {
 
   async updatePriceHistory(
     id: number,
-    createPriceHistoryDto: CreatePriceHistoryDto,
+    updatePriceHistoryDto: UpdatePriceHistoryDto,
   ): Promise<PriceHistory> {
     await this.getPriceHistoryById(id);
-    await this.priceHistoryRepository.update(id, createPriceHistoryDto);
+    await this.priceHistoryRepository.update(id, updatePriceHistoryDto);
     return await this.getPriceHistoryById(id);
   }
 

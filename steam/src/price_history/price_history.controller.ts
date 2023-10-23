@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { PriceHistoryService } from './price_history.service';
 import { CreatePriceHistoryDto } from './dto/create-price_history.dto';
+import { UpdatePriceHistoryDto } from './dto/update-price_history.dto';
 
 @Controller('price-history')
 export class PriceHistoryController {
@@ -35,11 +36,11 @@ export class PriceHistoryController {
   @Put(':id')
   async updatePriceHistory(
     @Param('id') id: number,
-    @Body() createPriceHistoryDto: CreatePriceHistoryDto,
+    @Body() updatePriceHistoryDto: UpdatePriceHistoryDto,
   ) {
     return this.priceHistoryService.updatePriceHistory(
       id,
-      createPriceHistoryDto,
+      updatePriceHistoryDto,
     );
   }
 

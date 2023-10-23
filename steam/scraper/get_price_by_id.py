@@ -9,7 +9,7 @@ import time
 db_params = {
     "dbname": "postgres",
     "user": "postgres",
-    "password": "postgres",
+    "password": "joaoename",
     "host": "127.0.0.1",  # Replace with your DB host if necessary
     "port": "5432"   # Replace with your DB port if necessary
 }
@@ -22,6 +22,8 @@ NUM_THREADS = 6
 def fetch_and_update_price(buff_id, conn, max_retries=5):
     retries = 0
     while retries < max_retries:
+        item_start_time = time.time() 
+        
         try:
             url = f'https://buff.163.com/api/market/goods/sell_order?game=csgo&goods_id={buff_id}'
             res = requests.get(url)
@@ -37,7 +39,9 @@ def fetch_and_update_price(buff_id, conn, max_retries=5):
 
                     # Collect data for batch insert
                     batch_data.append((buff_id, price, today))
-                    print(f"Price for goods ID {buff_id}: {price} added to batch.")
+                    item_end_time = time.time()  # Record the end time
+                    item_elapsed_time = item_end_time - item_start_time  # Calculate time taken
+                    print(f"Request for goods ID {buff_id} completed in {item_elapsed_time:.2f} seconds. Price: {price}")
                     return  # Success, exit the function
                 else:
                     print(f"No price found for goods ID {buff_id}.")
@@ -49,6 +53,7 @@ def fetch_and_update_price(buff_id, conn, max_retries=5):
         # Increment retries and apply exponential backoff
         retries += 1
         wait_time = 2 ** retries  # Exponential backoff: 2^retries seconds
+        print(f"Retrying to obtain item: {buff_id}. Waiting for {wait_time}")
         time.sleep(wait_time)
 
     print(f"Max retries reached for goods ID {buff_id}")
