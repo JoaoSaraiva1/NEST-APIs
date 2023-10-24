@@ -1,23 +1,21 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm';
 import { Item } from '../../items/entities/item.entity';
 
 @Entity()
-export class PurchasedItem {
+export class PurchasedItems {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ManyToMany(() => Item)
   @Column()
-  buffId: string;
+  buff_id: string;
 
-  @Column()
+  @Column('integer')
   quantity: number;
 
-  @Column()
+  @Column('decimal')
   purchase_price: number;
 
-  @Column()
+  @Column('date')
   purchase_date: Date;
-
-  @ManyToOne(() => Item, (item) => item.buff_id)
-  item: Item;
 }

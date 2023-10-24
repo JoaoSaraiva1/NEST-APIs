@@ -16,30 +16,38 @@ export class PurchasedItemsController {
   constructor(private readonly purchasedItemsService: PurchasedItemsService) {}
 
   @Post()
-  create(@Body() createPurchasedItemDto: CreatePurchasedItemDto) {
-    return this.purchasedItemsService.create(createPurchasedItemDto);
+  async createPriceHistory(
+    @Body() createPurchasedItemDto: CreatePurchasedItemDto,
+  ) {
+    return this.purchasedItemsService.createPurchasedItems(
+      createPurchasedItemDto,
+    );
   }
 
   @Get()
-  findAll() {
-    return this.purchasedItemsService.findAll();
+  async getPurchasedItem() {
+    return this.purchasedItemsService.getPurchasedItems();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.purchasedItemsService.findOne(+id);
+  async getPurchasedItemsById(@Param('id') id: number) {
+    return this.purchasedItemsService.getPurchasedItemsById(id);
   }
 
   @Put(':id')
-  update(
-    @Param('id') id: string,
+  async updatePurchasedItems(
+    @Param('id') id: number,
     @Body() updatePurchasedItemDto: UpdatePurchasedItemDto,
   ) {
-    return this.purchasedItemsService.update(+id, updatePurchasedItemDto);
+    return this.purchasedItemsService.updatePurchasedItems(
+      id,
+      updatePurchasedItemDto,
+    );
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.purchasedItemsService.remove(+id);
+  async deletePurchasedItems(@Param('id') id: number) {
+    this.purchasedItemsService.deletePurchasedItems(id);
+    return { message: `Purchased item with ID ${id} has been deleted` };
   }
 }
