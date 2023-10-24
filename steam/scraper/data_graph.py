@@ -39,7 +39,7 @@ try:
         unique_item_names = set(item_names)
 
         for item_name in unique_item_names:
-            plt.figure(figsize=(12, 6))
+            plt.figure(figsize=(14, 5))
             plt.title(f"Price Over Time for {item_name}")
             plt.xlabel("Date")
             plt.ylabel("Price")
@@ -49,7 +49,6 @@ try:
                     plt.plot(dates[i], prices[i], label=item_name, marker='o')
                     #plt.plot(prices[i], linestyle = 'dotted')
 
-            plt.legend()
             plt.grid(color = 'green', linestyle = '--', linewidth = 0.5)
 
             plt.show()

@@ -1,11 +1,5 @@
 // src/price-history/price-history.entity.ts
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToMany,
-  JoinTable,
-} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm';
 import { Item } from '../../items/entities/item.entity';
 
 @Entity()
@@ -14,7 +8,6 @@ export class PriceHistory {
   id: number;
 
   @ManyToMany(() => Item)
-  @JoinTable()
   @Column()
   buff_id: string;
 
